@@ -46,10 +46,10 @@ while True:
         else:
             print("Operação falhou! Número máximo de saques excedido!!")
     elif opcao == "e":
-        extrato += f"Saldo: R$ {saldo:.2f}\n"
-        print(" Extrato ".upper().center(20, "#"))
+        print(" Extrato ".upper().center(40, "#"))
         print("Não foram realizadas movimentações." if not extrato else extrato)
-        print("#".center(20, "#"))
+        print(f"\nSaldo: R$ {saldo:.2f}")
+        print("#".center(40, "#"))
     elif opcao == "q":
         print("Saindo!!!")
         break
