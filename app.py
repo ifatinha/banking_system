@@ -14,13 +14,18 @@ def menu():
     return input(menu)
 
 
-def deposito(valor, saldo):
-    saldo += valor
-    print("Operação efetuada com sucesso!")
-    return saldo
+def depositar(valor, saldo, extrato):
+    if valor > 0:
+        saldo += valor
+        extrato += salvar_extrato(f"Deposito: R$ {valor:.2f}\n")
+        print("=== Operação efetuada com sucesso! ===")
+    else:
+        print("@@@ Operação falhou! O valor informado é inválido! @@@")
+
+    return saldo, extrato
 
 
-def saque(valor, saldo):
+def saque(valor, saldo, extrato, num_saques, limite, limite_saques):
     saldo -= valor
     print("Operação efetuada com sucesso!")
     return saldo
@@ -45,7 +50,7 @@ def mostrar_extrato(saldo, extrato):
 def main():
     LIMITE_SAQUES = 3
     AGENCIA = "0001"
-    
+
     saldo = 0
     limite = 1000
     extrato = ""
@@ -59,12 +64,7 @@ def main():
 
         if opcao == "d":
             valorDeposito = float(input("Informe quanto você quer depositar: "))
-
-            if valorDeposito > 0:
-                saldo = deposito(valorDeposito, saldo)
-                extrato += salvar_extrato(f"Deposito: R$ {valorDeposito:.2f}\n")
-            else:
-                print("Operação falhou! O valor informado é inválido!")
+            saldo, extrato = depositar(valorDeposito, saldo, extrato)
         elif opcao == "s":
             if numero_saques < LIMITE_SAQUES:
                 valorSaque = float(input("Informe quanto você quer sacar: "))
