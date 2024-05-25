@@ -60,29 +60,30 @@ def exibir_extrato(saldo, /, *, extrato):
     print("#".center(40, "#"))
 
 
-def verificar_cliente(*, cliente, clientes):
-    for c in clientes:
-        if(c["codigo"] == cliente["codigo"]):
-            return True
+def verificar_cliente(*, codigo, clientes):
+    for cliente in clientes:
+        if(cliente["codigo"] == codigo):
+            return cliente
     return False
 
 ## Cadastrar novo cliente
 def cadastrar_cliente(clientes):
     codigo = input("Código: ")
-    nome = input("Nome: ")
     
-    cliente = {
-        "codigo": codigo,
-        "nome": nome
-    }
-    
-    if(verificar_cliente(cliente=cliente, clientes=clientes)):
+    if(verificar_cliente(codigo=codigo, clientes=clientes)):
         
         print('@@@ Erro! Já existe um cliente com o código informado. @@@')
     
     else:
+        nome = input("Nome: ")
+        cliente = {
+            "codigo": codigo,
+            "nome": nome
+        }
+        
         clientes.append(cliente)
         cliente = {}
+        print("### Cliente cadastrado com sucesso! ###")
     
     return clientes
 
@@ -94,12 +95,41 @@ def listar_clientes(clientes):
 
         for cliente in clientes:
             print(f"Código: {cliente["codigo"]}")
-            print(f"Cliente: {cliente["nome"]}")
+            print(f"Cliente: {cliente["nome"]}\n")
               
     else:
         print("\n@@@ Nenhum Cliente Cadastrado @@@".upper())
 
+def cadastrar_conta(*, agencia, numero_conta, clientes, contas):
+    codigo_cliente = input("Informe o código do cliente: ")
+    cliente = verificar_cliente(codigo=codigo_cliente, clientes=clientes)
+    
+    if cliente:
+        conta = {
+            "agencia": agencia,
+            "numero_conta":numero_conta,
+            "cliente": cliente
+        }
+        contas.append(conta)
+        print("### Conta cadastrada com sucesso. ###")
+    else:
+        print("\n@@@ Usuário não encontrado, fluxo de criação de conta encerrado! @@@")    
 
+    return contas
+
+def listar_contas(contas):
+    
+    if(len(contas) > 0):
+        print("Contas Cadastrados".center(40, "#").upper()+"\n")
+
+        for conta in contas:
+            print(f"Agência: {conta["agencia"]}")
+            print(f"Número: {conta["numero_conta"]}")
+            print(f"Titular: {conta["cliente"]["codigo"]} - {conta["cliente"]["nome"]}\n")
+              
+    else:
+        print("\n@@@ Não existem contas Cadastrada @@@".upper())
+    
 def main():
     LIMITE_SAQUES = 3
     AGENCIA = "0001"
@@ -131,19 +161,33 @@ def main():
                 limite=limite,
                 limite_saques=LIMITE_SAQUES,
             )
+            
         elif opcao == "e":
+            
             exibir_extrato(saldo, extrato=extrato)
+            
         elif opcao == "n":
-            print("Nova conta!")
+            
+            numero_conta = len(contas) + 1
+            contas = cadastrar_conta(agencia=AGENCIA, numero_conta=numero_conta, clientes=clientes, contas=contas)
+        
         elif opcao == "l":
-            print("Listar contas")
+            
+            listar_contas(contas=contas)
+            
         elif opcao == "c":
+            
             clientes = cadastrar_cliente(clientes)
+            
         elif opcao == "p":
+            
             listar_clientes(clientes)
+            
         elif opcao == "q":
+            
             print("Encerrando aplicação!!!")
             break
+        
         else:
             print(
                 "Operação inválida, por favor selecione novamente a operação desejada."
