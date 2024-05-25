@@ -60,6 +60,12 @@ def exibir_extrato(saldo, /, *, extrato):
     print("#".center(40, "#"))
 
 
+def verificar_cliente(*, cliente, clientes):
+    for c in clientes:
+        if(c["codigo"] == cliente["codigo"]):
+            return True
+    return False
+
 ## Cadastrar novo cliente
 def cadastrar_cliente(clientes):
     codigo = input("Código: ")
@@ -71,9 +77,15 @@ def cadastrar_cliente(clientes):
         "nome": nome,
         "email":email,
     }
-
-    clientes.append(cliente)
-    cliente = {}
+    
+    if(verificar_cliente(cliente=cliente, clientes=clientes)):
+        
+        print('@@@ Erro! Já existe um cliente com o código informado. @@@')
+    
+    else:
+        clientes.append(cliente)
+        cliente = {}
+    
     return clientes
 
 
