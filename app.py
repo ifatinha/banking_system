@@ -70,12 +70,10 @@ def verificar_cliente(*, cliente, clientes):
 def cadastrar_cliente(clientes):
     codigo = input("Código: ")
     nome = input("Nome: ")
-    email = input("Email: ")
     
     cliente = {
         "codigo": codigo,
-        "nome": nome,
-        "email":email,
+        "nome": nome
     }
     
     if(verificar_cliente(cliente=cliente, clientes=clientes)):
@@ -97,9 +95,7 @@ def listar_clientes(clientes):
         for cliente in clientes:
             print(f"Código: {cliente["codigo"]}")
             print(f"Cliente: {cliente["nome"]}")
-            print(f"Email: {cliente["email"]}\n")
-            
-            
+              
     else:
         print("\n@@@ Nenhum Cliente Cadastrado @@@".upper())
 
