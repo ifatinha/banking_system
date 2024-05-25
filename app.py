@@ -1,12 +1,16 @@
+import os
+
+
 def menu():
     menu = """ 
     ################ MENU ################
     [d] Depositar
     [s] Sacar
     [e] Extrato
-    [nc] Nova Conta
-    [lc] Listar Contas
-    [nu] Novo Usuário
+    [n] Nova Conta
+    [l] Listar Contas
+    [c] Novo Cliente
+    [p] Listar Clientes
     [q] Sair
     => """
 
@@ -23,6 +27,7 @@ def depositar(valor, saldo, extrato, /):
         print("@@@ Operação falhou! O valor informado é inválido! @@@")
 
     return saldo, extrato
+
 
 ## Passagem de parametros de forma nomeada
 def sacar(*, valor, saldo, extrato, numero_saques, limite, limite_saques):
@@ -46,12 +51,45 @@ def sacar(*, valor, saldo, extrato, numero_saques, limite, limite_saques):
 
     return saldo, extrato, numero_saques
 
+
 ## Passagem de parametros de forma posicional e nomeada
 def exibir_extrato(saldo, /, *, extrato):
     print(" Extrato ".upper().center(40, "#"))
     print("Não foram realizadas movimentações." if not extrato else extrato)
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("#".center(40, "#"))
+
+
+## Cadastrar novo cliente
+def cadastrar_cliente(clientes):
+    codigo = input("Código: ")
+    nome = input("Nome: ")
+    email = input("Email: ")
+    
+    cliente = {
+        "codigo": codigo,
+        "nome": nome,
+        "email":email,
+    }
+
+    clientes.append(cliente)
+    cliente = {}
+    return clientes
+
+
+def listar_clientes(clientes):
+    
+    if(len(clientes) > 0):
+        print("Clientes Cadastrados".center(40, "#").upper()+"\n")
+
+        for cliente in clientes:
+            print(f"Código: {cliente["codigo"]}")
+            print(f"Cliente: {cliente["nome"]}")
+            print(f"Email: {cliente["email"]}\n")
+            
+            
+    else:
+        print("\n@@@ Nenhum Cliente Cadastrado @@@".upper())
 
 
 def main():
@@ -87,6 +125,14 @@ def main():
             )
         elif opcao == "e":
             exibir_extrato(saldo, extrato=extrato)
+        elif opcao == "n":
+            print("Nova conta!")
+        elif opcao == "l":
+            print("Listar contas")
+        elif opcao == "c":
+            clientes = cadastrar_cliente(clientes)
+        elif opcao == "p":
+            listar_clientes(clientes)
         elif opcao == "q":
             print("Encerrando aplicação!!!")
             break
