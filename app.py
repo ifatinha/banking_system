@@ -108,10 +108,15 @@ def cadastrar_conta(*, agencia, numero_conta, clientes, contas):
         conta = {
             "agencia": agencia,
             "numero_conta":numero_conta,
-            "cliente": cliente
+            "cliente": cliente,
+            "ativo": True
         }
-        contas.append(conta)
-        print("### Conta cadastrada com sucesso. ###")
+        
+        if conta:
+            
+            contas.append(conta)
+            print("### Conta cadastrada com sucesso. ###")
+    
     else:
         print("\n@@@ Usuário não encontrado, fluxo de criação de conta encerrado! @@@")    
 
@@ -120,13 +125,16 @@ def cadastrar_conta(*, agencia, numero_conta, clientes, contas):
 def listar_contas(contas):
     
     if(len(contas) > 0):
-        print("Contas Cadastrados".center(40, "#").upper()+"\n")
+        print("Contas Cadastradas".center(40, "#").upper()+"\n")
 
         for conta in contas:
+            situacao = "Ativa" if conta["ativo"] else "Desativada"
             print(f"Agência: {conta["agencia"]}")
             print(f"Número: {conta["numero_conta"]}")
-            print(f"Titular: {conta["cliente"]["codigo"]} - {conta["cliente"]["nome"]}\n")
-              
+            print(f"Titular: {conta["cliente"]["codigo"]} - {conta["cliente"]["nome"]}")
+            print(f"Situação: {situacao}\n")
+            print("=" * 50)
+
     else:
         print("\n@@@ Não existem contas Cadastrada @@@".upper())
     
@@ -140,6 +148,7 @@ def main():
     numero_saques = 0
     clientes = []
     contas = []
+    numero_conta = 1
 
     while True:
 
@@ -168,8 +177,12 @@ def main():
             
         elif opcao == "n":
             
-            numero_conta = len(contas) + 1
-            contas = cadastrar_conta(agencia=AGENCIA, numero_conta=numero_conta, clientes=clientes, contas=contas)
+            contas = cadastrar_conta(
+                agencia=AGENCIA, 
+                numero_conta=numero_conta, 
+                clientes=clientes, 
+                contas=contas)
+            numero_conta += 1
         
         elif opcao == "l":
             
