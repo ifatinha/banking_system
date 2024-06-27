@@ -3,7 +3,7 @@ import Client
 
 class FisicalPerson(Client.Client):
 
-    def __init__(self, address, cpf, name, birthday) -> None:
+    def __init__(self, cpf, name, birthday, address) -> None:
         super().__init__(address)
         self.__cpf = cpf
         self.__name = name
