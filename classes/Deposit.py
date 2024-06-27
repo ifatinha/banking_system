@@ -12,4 +12,7 @@ class Deposit(Transaction.Transaction):
         return self.__value
 
     def register(self, account):
-        account.deposit(self.value)
+        success_transaction = account.withdraw(self.value)
+
+        if success_transaction:
+            account.historic.addTransaction(self)

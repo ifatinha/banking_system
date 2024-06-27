@@ -1,11 +1,20 @@
+import datetime
+
+
 class Historic:
 
     def __init__(self) -> None:
-        self.__historics = []
+        self.__transactions = []
 
     @property
-    def historics(self):
-        return self.__historics
+    def transactions(self):
+        return self.__transactions
 
     def addTransaction(self, transaction):
-        self.historics.append(transaction)
+        self.transactions.append(
+            {
+                "type": transaction.__class__.__name__,
+                "value": transaction.value,
+                "date": datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%s"),
+            }
+        )

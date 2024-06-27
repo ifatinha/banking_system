@@ -1,7 +1,7 @@
-import Client
+from classes.Client import Client
 
 
-class FisicalPerson(Client.Client):
+class FisicalPerson(Client):
 
     def __init__(self, cpf, name, birthday, address) -> None:
         super().__init__(address)

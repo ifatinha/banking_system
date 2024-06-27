@@ -1,37 +1,37 @@
 from util.menu import menu
-from classes.Client import Client
+from classes.FisicalPerson import FisicalPerson
+from database.Database import Database
 
 
 def main():
-
-    LIMITE_SAQUES = 3
-    AGENCIA = "0001"
-
-    saldo = 0
-    limite = 1000
-    extrato = ""
-    numero_saques = 0
     clientes = []
-    contas = []
-    numero_conta = 1
 
     while True:
         opcao = menu()
 
         if opcao == "d":
+            #deposito
             pass
         elif opcao == "s":
+            #saque
             pass
         elif opcao == "e":
+            ##historico
             pass
         elif opcao == "n":
+            ##nova conta
             pass
         elif opcao == "l":
+            ##listar contas
             pass
         elif opcao == "c":
-            pass
+
+            print("Informe os dados abaixo para cadatrar um novo Cliente\n")
+            cpf = input("CPF: ")
+            Database.save_client(cpf)
+
         elif opcao == "p":
-            pass
+            Database.list_clients()
         elif opcao == "q":
             break
         else:
