@@ -1,6 +1,5 @@
 import os
 
-
 def menu():
     menu = """ 
     ################ MENU ################
