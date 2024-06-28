@@ -22,15 +22,12 @@ class CurrentAccount(Account):
             [
                 transaction
                 for transaction in self.historic.transactions
-                if transaction["type"] == Withdraw.Withdraw.__name__
+                if transaction["type"] == Withdraw.__name__
             ]
         )
 
         exceeded_limit = value > self.limit
         exceeded_withdrawals = number_withdrawals >= self.withdrawal_limit
-
-        print(value)
-        print(self.withdrawal_limit)
 
         if exceeded_limit:
             print("@@@ Operação falhou! O valor excede o limite! @@@")

@@ -15,6 +15,10 @@ class Historic:
             {
                 "type": transaction.__class__.__name__,
                 "value": transaction.value,
-                "date": datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%s"),
+                "date": datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
             }
         )
+
+    def list_historic(self):
+        for t in self.transactions:
+            print(t)

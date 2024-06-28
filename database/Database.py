@@ -1,5 +1,7 @@
 from classes.FisicalPerson import FisicalPerson
 from classes.CurrentAccount import CurrentAccount
+from classes.Deposit import Deposit
+from classes.Withdraw import Withdraw
 from database.ClientsList import ClientList
 
 
@@ -87,7 +89,8 @@ class Database:
 
             if len(account) > 0:
                 value = float(input("Valor do Deposito: "))
-                account[0].deposit(value)
+                depoist = Deposit(value)
+                depoist.register(account[0])
             else:
                 print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
         else:
@@ -103,7 +106,23 @@ class Database:
 
             if len(account) > 0:
                 value = float(input("Valor do Saque: "))
-                account[0].withdraw(value)
+                withdraw = Withdraw(value)
+                withdraw.register(account[0])
+            else:
+                print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
+        else:
+            print("\n@@@ Cliente não encontrado, fluxo de operação encerrado! @@@")
+
+    @classmethod
+    def list_historic(cls, cpf):
+        client = Database.find_client(cpf=cpf)
+
+        if client:
+            number_account = int(input("Digite o número da conta: "))
+            account = Database.find_account(client.accounts, number_account)
+
+            if len(account) > 0:
+                account[0].historic.list_historic()
             else:
                 print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
         else:

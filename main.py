@@ -13,13 +13,15 @@ def main():
             Database.save_deposit(cpf=cpf)
 
         elif opcao == "s":
-            
+
             cpf = input("Informe o CPF do cliente: ")
             Database.save_withdraw(cpf=cpf)
-            
+
         elif opcao == "e":
-            ##historico
-            pass
+            
+            cpf = input("Informe o CPF do cliente: ")
+            Database.list_historic(cpf)
+            
         elif opcao == "n":
 
             print("Informe os dados abaixo para cadatrar um novo Cliente\n")
