@@ -20,3 +20,12 @@ class FisicalPerson(Client):
     @property
     def birthday(self):
         return self.__birthday
+
+    def __str__(self) -> str:
+        return f"""
+            Client: {self.name}
+            CPF: {self.cpf}
+            Birthday: {self.birthday}
+            Address: {self.address}
+            Contas: {len(self.accounts)}
+        """

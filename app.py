@@ -86,7 +86,6 @@ def cadastrar_cliente(clientes):
     
     return clientes
 
-
 def listar_clientes(clientes):
     
     if(len(clientes) > 0):

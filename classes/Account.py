@@ -1,18 +1,23 @@
-import Historic
+from classes.Historic import Historic
+import random
 
 
 class Account:
 
-    def __init__(self, number, client) -> None:
-        self.__balance = 0
-        self.__number = number
+    def __init__(self, client) -> None:
+        self.__balance = float()
+        self.__number = random.randint(1, 100)
         self.__client = client
         self.__agency = "0001"
-        self.__historic = Historic.Historic()
+        self.__historic = Historic()
 
     @property
     def balance(self):
         return self.__balance
+
+    @balance.setter
+    def balance(self, value):
+        self.__balance = value
 
     @property
     def number(self):

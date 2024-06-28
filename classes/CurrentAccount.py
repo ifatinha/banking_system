@@ -1,11 +1,11 @@
-import Account
-import Withdraw
+from classes.Account import Account
+from classes.Withdraw import Withdraw
 
 
-class CurrentAccount(Account.Account):
+class CurrentAccount(Account):
 
-    def __init__(self, number, client, limit=5000, withdrawal_limit=5) -> None:
-        super().__init__(number, client)
+    def __init__(self, client, limit=5000, withdrawal_limit=5) -> None:
+        super().__init__(client)
         self.__limit = limit
         self.__withdrawal_limit = withdrawal_limit
 
@@ -14,7 +14,7 @@ class CurrentAccount(Account.Account):
         return self.__limit
 
     @property
-    def withdraw_limit(self):
+    def withdrawal_limit(self):
         return self.__withdrawal_limit
 
     def withdraw(self, value):
@@ -26,11 +26,14 @@ class CurrentAccount(Account.Account):
             ]
         )
 
-        exceeded_limit = value > self.withdrawal_limit
-        exceeded_withdrawals = number_withdrawals >= self.withdraw_limit
+        exceeded_limit = value > self.limit
+        exceeded_withdrawals = number_withdrawals >= self.withdrawal_limit
+
+        print(value)
+        print(self.withdrawal_limit)
 
         if exceeded_limit:
-            print("@@@ Operação falhou! O valor de saque excede o limite! @@@")
+            print("@@@ Operação falhou! O valor excede o limite! @@@")
         elif exceeded_withdrawals:
             print("@@@ Operação falhou! Número máximo de saques excedido! @@@")
         else:
@@ -39,8 +42,9 @@ class CurrentAccount(Account.Account):
         return False
 
     def __str__(self) -> str:
+        # Titular: {self.client.name}
         return f"""\
             Agency: {self.agency}
-            C/C:\t\t{self.number}
-            Titular: {self.client.name}
+            C/C: {self.number}
+            Saldo: $ {self.balance}
         """

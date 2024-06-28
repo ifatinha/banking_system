@@ -1,9 +1,11 @@
 from classes.FisicalPerson import FisicalPerson
+from classes.CurrentAccount import CurrentAccount
+from database.ClientsList import ClientList
 
 
 class Database:
 
-    _clients = []
+    _clients = ClientList.export_list()
 
     @classmethod
     def find_client(cls, *, cpf):
@@ -30,20 +32,79 @@ class Database:
     @classmethod
     def list_clients(cls):
         if len(cls._clients) > 0:
-            print("Clientes Cadastrados")
-            for client in cls._clients:
-                print(
-                    f"""
-                Client: {client.name}
-                CPF: {client.cpf}
-                Birthday: {client.birthday}
-                Address: {client.address}
-                Contas: {client.accounts}
+            print(
                 """
-                )
+            ### Clientes Cadastrados ### 
+            """
+            )
+            for client in cls._clients:
+                print(client)
         else:
             print("@@@ Nenhum Cliente Cadastrado. @@@")
 
     @classmethod
-    def save_account(account):
-        pass
+    def save_account(cls, cpf):
+        client = Database.find_client(cpf=cpf)
+
+        if client:
+            client.create_account(CurrentAccount(client))
+            print("### Conta cadastrada com sucesso. ###")
+        else:
+            print(
+                "\n@@@ Cliente não encontrado, fluxo de criação de conta encerrado! @@@"
+            )
+
+    @classmethod
+    def list_accounts_client(cls, cpf):
+        client = Database.find_client(cpf=cpf)
+
+        if client:
+            if len(client.accounts) > 0:
+                print(f"Contas do Titular {client.name} ")
+                for account in client.accounts:
+                    print(account)
+            else:
+                print(
+                    f"\n@@@ Não existem contas Cadastrada para o titular {client.name} @@@".upper()
+                )
+
+        else:
+            print(
+                "\n@@@ Cliente não encontrado, fluxo de criação de conta encerrado! @@@"
+            )
+
+    @classmethod
+    def find_account(cls, accounts, number_account):
+        return [a for a in accounts if a.number == number_account]
+
+    @classmethod
+    def save_deposit(cls, cpf):
+        client = Database.find_client(cpf=cpf)
+
+        if client:
+            number_account = int(input("Digite o número da conta: "))
+            account = Database.find_account(client.accounts, number_account)
+
+            if len(account) > 0:
+                value = float(input("Valor do Deposito: "))
+                account[0].deposit(value)
+            else:
+                print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
+        else:
+            print("\n@@@ Cliente não encontrado, fluxo de operação encerrado! @@@")
+
+    @classmethod
+    def save_withdraw(cls, cpf):
+        client = Database.find_client(cpf=cpf)
+
+        if client:
+            number_account = int(input("Digite o número da conta: "))
+            account = Database.find_account(client.accounts, number_account)
+
+            if len(account) > 0:
+                value = float(input("Valor do Saque: "))
+                account[0].withdraw(value)
+            else:
+                print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
+        else:
+            print("\n@@@ Cliente não encontrado, fluxo de operação encerrado! @@@")

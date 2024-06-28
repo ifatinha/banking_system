@@ -1,7 +1,7 @@
-import Transaction
+from classes.Transaction import Transaction
 
 
-class Deposit(Transaction.Transaction):
+class Deposit(Transaction):
 
     def __init__(self, value) -> None:
         super().__init__()

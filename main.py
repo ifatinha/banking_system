@@ -1,28 +1,37 @@
 from util.menu import menu
-from classes.FisicalPerson import FisicalPerson
 from database.Database import Database
 
 
 def main():
-    clientes = []
 
     while True:
         opcao = menu()
 
         if opcao == "d":
-            #deposito
-            pass
+
+            cpf = input("Informe o CPF do cliente: ")
+            Database.save_deposit(cpf=cpf)
+
         elif opcao == "s":
-            #saque
-            pass
+            
+            cpf = input("Informe o CPF do cliente: ")
+            Database.save_withdraw(cpf=cpf)
+            
         elif opcao == "e":
             ##historico
             pass
         elif opcao == "n":
-            ##nova conta
-            pass
+
+            print("Informe os dados abaixo para cadatrar um novo Cliente\n")
+            cpf = input("Informe o CPF do cliente: ")
+            Database.save_account(cpf=cpf)
+
         elif opcao == "l":
-            ##listar contas
+
+            print("Informe os dados abaixo para cadatrar um novo Cliente\n")
+            cpf = input("Informe o CPF do cliente: ")
+            Database.list_accounts_client(cpf=cpf)
+
             pass
         elif opcao == "c":
 
