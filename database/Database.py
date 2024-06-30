@@ -3,6 +3,7 @@ from classes.CurrentAccount import CurrentAccount
 from classes.Deposit import Deposit
 from classes.Withdraw import Withdraw
 from database.ClientsList import ClientList
+from util.Decoratores import log_operations
 
 
 class Database:
@@ -45,6 +46,7 @@ class Database:
             print("@@@ Nenhum Cliente Cadastrado. @@@")
 
     @classmethod
+    @log_operations("Created Account")
     def save_account(cls, cpf):
         client = Database.find_client(cpf=cpf)
 
