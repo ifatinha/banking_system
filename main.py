@@ -18,10 +18,10 @@ def main():
             Database.save_withdraw(cpf=cpf)
 
         elif opcao == "e":
-            
+
             cpf = input("Informe o CPF do cliente: ")
             Database.list_historic(cpf)
-            
+
         elif opcao == "n":
 
             print("Informe os dados abaixo para cadatrar um novo Cliente\n")
@@ -30,11 +30,15 @@ def main():
 
         elif opcao == "l":
 
-            print("Informe os dados abaixo para cadatrar um novo Cliente\n")
+            print("Listar Contas do Cliente\n")
             cpf = input("Informe o CPF do cliente: ")
             Database.list_accounts_client(cpf=cpf)
 
-            pass
+        elif opcao == "m":
+
+            print("Contas Cadastradas")
+            Database.list_bank_accounts()
+
         elif opcao == "c":
 
             print("Informe os dados abaixo para cadatrar um novo Cliente\n")
@@ -42,7 +46,9 @@ def main():
             Database.save_client(cpf)
 
         elif opcao == "p":
+
             Database.list_clients()
+
         elif opcao == "q":
             break
         else:

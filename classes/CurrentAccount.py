@@ -4,7 +4,7 @@ from classes.Withdraw import Withdraw
 
 class CurrentAccount(Account):
 
-    def __init__(self, client, limit=5000, withdrawal_limit=3) -> None:
+    def __init__(self, client, limit=5000, withdrawal_limit=10) -> None:
         super().__init__(client)
         self.__limit = limit
         self.__withdrawal_limit = withdrawal_limit
@@ -39,8 +39,8 @@ class CurrentAccount(Account):
         return False
 
     def __str__(self) -> str:
-        # Titular: {self.client.name}
         return f"""\
+            Titular: {self.client.name}
             Agency: {self.agency}
             C/C: {self.number}
             Saldo: $ {self.balance}

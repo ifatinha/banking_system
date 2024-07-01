@@ -19,6 +19,4 @@ class Historic:
             }
         )
 
-    def list_historic(self):
-        for t in self.transactions:
-            print(t)
+    ##Fazer um metodo para verificar as transações do dia

@@ -5,6 +5,7 @@ from classes.Withdraw import Withdraw
 from database.ClientsList import ClientList
 from util.Decoratores import log_operations
 from util.Generators import report_generator
+from util.AccountIterator import AccountIterator
 
 
 class Database:
@@ -79,6 +80,13 @@ class Database:
             )
 
     @classmethod
+    def list_bank_accounts(cls):
+        for client in cls._clients:
+            accounts = AccountIterator(client.accounts)
+            for account in accounts:
+                print(account)
+
+    @classmethod
     def find_account(cls, accounts, number_account):
         return [a for a in accounts if a.number == number_account]
 
@@ -128,9 +136,24 @@ class Database:
             account = Database.find_account(client.accounts, number_account)
 
             if len(account) > 0:
-                # account[0].historic.list_historic()
-                for i in report_generator(account[0].historic.transactions):
-                    print(i)
+                type_extract = int(
+                    input(
+                        "Qual tipo de extrado você deseja: \n 1 - Deposit, 2 - Withdraw, 3 - Completed: "
+                    )
+                )
+                report = report_generator(
+                    account[0].historic.transactions, type_extract
+                )
+
+                print("=== Bank Statement ===")
+                for i in report:
+                    print(
+                        f"""
+                    Type: {i["type"]}
+                    Value: {i["value"]}
+                    Date: {i["date"]}
+                    """
+                    )
             else:
                 print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
         else:

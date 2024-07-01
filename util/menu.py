@@ -5,7 +5,8 @@ def menu():
     [s] Sacar
     [e] Extrato
     [n] Nova Conta
-    [l] Listar Contas
+    [l] Listar Contas Cliente
+    [m] Listar Contas do Banco
     [c] Novo Cliente
     [p] Listar Clientes
     [q] Sair
