@@ -13,3 +13,9 @@ def log_operations(type_operation):
         return wrapper
     return log_decorator
 
+
+def report_generator(transactions):
+    def wrapper(*args, **kwargs):
+        transactions()
+    return wrapper
+

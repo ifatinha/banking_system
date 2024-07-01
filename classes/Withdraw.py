@@ -1,5 +1,4 @@
 from classes.Transaction import Transaction
-from util.Decoratores import log_operations
 
 
 class Withdraw(Transaction):
@@ -12,7 +11,6 @@ class Withdraw(Transaction):
     def value(self):
         return self.__value
 
-    @log_operations("Withdraw")
     def register(self, account):
         success_transaction = account.withdraw(self.value)
 

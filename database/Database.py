@@ -82,6 +82,7 @@ class Database:
         return [a for a in accounts if a.number == number_account]
 
     @classmethod
+    @log_operations("Deposit")
     def save_deposit(cls, cpf):
         client = Database.find_client(cpf=cpf)
 
@@ -99,6 +100,7 @@ class Database:
             print("\n@@@ Cliente não encontrado, fluxo de operação encerrado! @@@")
 
     @classmethod
+    @log_operations("Withdraw")
     def save_withdraw(cls, cpf):
         client = Database.find_client(cpf=cpf)
 
@@ -116,6 +118,7 @@ class Database:
             print("\n@@@ Cliente não encontrado, fluxo de operação encerrado! @@@")
 
     @classmethod
+    @log_operations("Extract")
     def list_historic(cls, cpf):
         client = Database.find_client(cpf=cpf)
 
