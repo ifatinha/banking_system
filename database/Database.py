@@ -4,6 +4,7 @@ from classes.Deposit import Deposit
 from classes.Withdraw import Withdraw
 from database.ClientsList import ClientList
 from util.Decoratores import log_operations
+from util.Generators import report_generator
 
 
 class Database:
@@ -127,7 +128,9 @@ class Database:
             account = Database.find_account(client.accounts, number_account)
 
             if len(account) > 0:
-                account[0].historic.list_historic()
+                # account[0].historic.list_historic()
+                for i in report_generator(account[0].historic.transactions):
+                    print(i)
             else:
                 print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
         else:
