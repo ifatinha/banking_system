@@ -21,7 +21,7 @@ class CurrentAccount(Account):
         number_withdrawals = len(
             [
                 transaction
-                for transaction in self.historic.transactions
+                for transaction in self.historic.check_daily_withdrawal()
                 if transaction["type"] == Withdraw.__name__
             ]
         )

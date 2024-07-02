@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 
 class Historic:
@@ -15,8 +15,14 @@ class Historic:
             {
                 "type": transaction.__class__.__name__,
                 "value": transaction.value,
-                "date": datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                "date": datetime.now(),
             }
         )
 
-    ##Fazer um metodo para verificar as transações do dia
+    def check_daily_withdrawal(self):
+        now = datetime.now().strftime("%d-%m-%Y")
+        transactions_day = []
+        for transaction in self.transactions:
+            if now == transaction["date"].strftime("%d-%m-%Y"):
+                transactions_day.append(transaction)
+        return transactions_day
