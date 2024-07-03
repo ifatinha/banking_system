@@ -4,7 +4,7 @@ from classes.Withdraw import Withdraw
 
 class CurrentAccount(Account):
 
-    def __init__(self, client, limit=5000, transaction_limit=2) -> None:
+    def __init__(self, client, limit=5000, transaction_limit=10) -> None:
         super().__init__(client)
         self.__limit = limit
         self.__transaction_limit = transaction_limit
