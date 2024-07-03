@@ -19,7 +19,7 @@ class Historic:
             }
         )
 
-    def check_daily_withdrawal(self):
+    def check_day_transactions(self):
         now = datetime.now().strftime("%d-%m-%Y")
         transactions_day = []
         for transaction in self.transactions:

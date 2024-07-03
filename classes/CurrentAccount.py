@@ -4,37 +4,49 @@ from classes.Withdraw import Withdraw
 
 class CurrentAccount(Account):
 
-    def __init__(self, client, limit=5000, withdrawal_limit=10) -> None:
+    def __init__(self, client, limit=5000, transaction_limit=2) -> None:
         super().__init__(client)
         self.__limit = limit
-        self.__withdrawal_limit = withdrawal_limit
+        self.__transaction_limit = transaction_limit
 
     @property
     def limit(self):
         return self.__limit
 
     @property
-    def withdrawal_limit(self):
-        return self.__withdrawal_limit
+    def transaction_limit(self):
+        return self.__transaction_limit
 
-    def withdraw(self, value):
-        number_withdrawals = len(
-            [
-                transaction
-                for transaction in self.historic.check_daily_withdrawal()
-                if transaction["type"] == Withdraw.__name__
-            ]
+    def exceeded_limit_transactions(self):
+        total = len(
+            [transaction for transaction in self.historic.check_day_transactions()]
         )
 
+        return total >= self.transaction_limit
+
+    def withdraw(self, value):
+
         exceeded_limit = value > self.limit
-        exceeded_withdrawals = number_withdrawals >= self.withdrawal_limit
 
         if exceeded_limit:
             print("@@@ Operação falhou! O valor excede o limite! @@@")
-        elif exceeded_withdrawals:
-            print("@@@ Operação falhou! Número máximo de saques excedido! @@@")
+        elif self.exceeded_limit_transactions():
+            print(
+                "@@@ Operação falhou! Número máximo de transações diárias excedido! @@@"
+            )
         else:
             return super().withdraw(value)
+
+        return False
+
+    def deposit(self, value):
+
+        if self.exceeded_limit_transactions():
+            print(
+                "@@@ Operação falhou! Número máximo de transações diárias excedido! @@@"
+            )
+        elif value > 0:
+            return super().deposit(value)
 
         return False
 
