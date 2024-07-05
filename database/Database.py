@@ -55,10 +55,12 @@ class Database:
         if client:
             client.create_account(CurrentAccount(client))
             print("### Conta cadastrada com sucesso. ###")
+            return True
         else:
             print(
                 "\n@@@ Cliente não encontrado, fluxo de criação de conta encerrado! @@@"
             )
+            return False
 
     @classmethod
     def list_accounts_client(cls, cpf):
@@ -102,11 +104,13 @@ class Database:
             if len(account) > 0:
                 value = float(input("Valor do Deposito: "))
                 depoist = Deposit(value)
-                depoist.register(account[0])
+                return depoist.register(account[0])
             else:
                 print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
         else:
             print("\n@@@ Cliente não encontrado, fluxo de operação encerrado! @@@")
+
+        return False
 
     @classmethod
     @log_operations("Withdraw")
@@ -120,11 +124,13 @@ class Database:
             if len(account) > 0:
                 value = float(input("Valor do Saque: "))
                 withdraw = Withdraw(value)
-                withdraw.register(account[0])
+                return withdraw.register(account[0])
             else:
                 print("\n@@@ Conta não encontrada, fluxo de operação encerrado! @@@")
         else:
             print("\n@@@ Cliente não encontrado, fluxo de operação encerrado! @@@")
+
+        return False
 
     @classmethod
     @log_operations("Extract")

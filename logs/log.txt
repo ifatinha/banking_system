@@ -1,0 +1,16 @@
+05/07/2024 08:34 - Created Account
+05/07/2024 08:39 - Created Account
+05/07/2024 08:40 - Created Account
+05/07/2024 08:42 - kwargs
+05/07/2024 08:43 - {'cpf': '1'}
+05/07/2024 08:44 - {'cpf': ''}
+05/07/2024 08:44 - {'cpf': '1'}
+05/07/2024 08:48 - save_account - (cls, cpf){'cpf': '1'}
+05/07/2024 08:48 - save_deposit - (cls, cpf){'cpf': '1'}
+05/07/2024 08:51 - save_account - (cls, cpf) - <class 'inspect._empty'>
+05/07/2024 08:52 - save_deposit - (cls, cpf) - <class 'inspect._empty'>
+05/07/2024 08:56 - save_account - (cls, cpf) - <class 'inspect._empty'>
+05/07/2024 08:57 - save_account - (cls, cpf) - <class 'inspect._empty'>
+05/07/2024 09:06 - save_account - (cls, cpf) - <class 'inspect._empty'>
+05/07/2024 09:07 - save_account - (cls, cpf) - True
+05/07/2024 09:08 - save_deposit - (cls, cpf) - True
