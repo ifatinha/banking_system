@@ -1,5 +1,4 @@
 from classes.Account import Account
-from classes.Withdraw import Withdraw
 
 
 class CurrentAccount(Account):
