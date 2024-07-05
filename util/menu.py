@@ -1,6 +1,5 @@
 def menu():
-    menu = """ 
-    ################ MENU ################
+    menu = """################ MENU ################
     [d] Depositar
     [s] Sacar
     [e] Extrato

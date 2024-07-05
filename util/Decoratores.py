@@ -34,7 +34,7 @@ def log_operations(type_operation):
                         file.write(log_txt)
 
             except IOError as err:
-                print("Erro ao criar o arquivo. {err}")
+                print(f"Erro ao criar o arquivo. {err}")
 
         return wrapper
 

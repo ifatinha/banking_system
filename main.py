@@ -52,9 +52,7 @@ def main():
         elif opcao == "q":
             break
         else:
-            print(
-                "Operação inválida, por favor selecione novamente a operação desejada."
-            )
+            print("Operação inválida, selecione novamente.")
 
 
 main()
